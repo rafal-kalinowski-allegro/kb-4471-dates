@@ -1,17 +1,17 @@
-<!doctype html><html><head><meta charset="utf-8"><title>#4471 · split into three problems · support kb</title>
+<!doctype html><html><head><meta charset="utf-8"><title>#4471 · split into two problems · support kb</title>
 <style>body{font:16px system-ui;max-width:46rem;margin:2rem auto;padding:0 1rem;background:#fbfaf7;color:#1d1d1b}aside{border-left:4px solid #b4501f;background:#fbeee6;padding:.5rem 1rem}table{border-collapse:collapse}td,th{border:1px solid #e3e0d8;padding:.3rem .7rem;text-align:left}.stamp{font:.85rem monospace;color:#6b6a66}.stamp b{color:#2f6f5e}</style></head><body>
-<p><a href="/kb">support desk · kb</a></p><h1>#4471 · split into three problems</h1>
+<p><a href="/kb">support desk · kb</a></p><h1>#4471 · split into two problems</h1>
 <p>owner <b>rafal.kalinowski</b> · living · reviewed 2026-11-06</p>
-<p><a href="/kb/incidents/4471">#4471</a> merged 412 reports as "dates parse mm/dd in eu locales". It is not one bug. It is three, and only the first is what that page says.</p>
-<aside>Not one issue. The queued parser fix closes problem 1 only. Problems 2 and 3 have no fix queued.</aside>
-<p><strong>412</strong> unique reports in #4471 · <strong>3</strong> problems</p>
+<p><a href="/kb/incidents/4471">#4471</a> merged 412 reports as "dates parse mm/dd in eu locales". It is not one bug. It is two, and only the first is what that page says.</p>
+<aside>Not one issue. The queued parser fix closes problem 1 only. Problem 2 has no fix queued.</aside>
+<p><strong>412</strong> unique reports in #4471 · <strong>2</strong> problems</p>
 <table><thead><tr><th>problem</th><th>reports</th></tr></thead><tbody>
-<tr><td>parser reads dates month first</td><td>374</td></tr>
+<tr><td>parser reads dates month first</td><td>379</td></tr>
 <tr><td>booking-v3 form hints MM/DD/YYYY to day-first tenants</td><td>33</td></tr>
-<tr><td>one-day move (not a month flip)</td><td>5</td></tr></tbody></table>
+</tbody></table><p>5 of the parser reports read as a one-day move, not a month flip; counted under parser, as the desk files them.</p>
 <h2>1. Parser reads dates month first</h2><p>The shared parser reads every date month first; day-first tenants' dates come out flipped. This is the bug #4471 is about. Hits every day-first tenant, all channels.</p>
 <h2>2. booking-v3 form hint</h2><p>Tenants on <code>booking-v3</code> (alder.physio, copper.studio, pale.harbour) are day-first, but the form prints <code>MM/DD/YYYY</code> under the date field. Their people type what the hint says, month first, and the form reads it their way: a flip the parser fix will not touch. Form channel only.</p>
-<h2>3. One-day move</h2><p>R-41202, R-41209, R-41236, R-41344, R-41620 describe a date one day off, not a month flip. That smells like time zones or clocks. The desk notes already single them out. Cause not yet placed.</p>
-<h2>Why the old table hid it</h2><p>It counts by tenant and form only, so problem 3 sits inside <code>parser</code>, and problem 2 is marked "not this ticket". Intake tags are a browser guess. Reports also arrive twice in the export (427 rows, 412 unique ids): count by id.</p>
-<h2>Lessons</h2><ul><li>Merging by subject (decision 0001) merged three causes. Check cause before merging.</li></ul>
+<h3>Footnote: one-day moves</h3><p>R-41202, R-41209, R-41236, R-41344, R-41620 describe a date one day off, not a month flip. That smells like time zones or clocks. The desk notes already single them out. Counted under the parser; the real cause may differ.</p>
+<h2>Why the old table hid it</h2><p>It counts by tenant and form only, so problem 2 is marked "not this ticket". Intake tags are a browser guess. Reports also arrive twice in the export (427 rows, 412 unique ids): count by id.</p>
+<h2>Lessons</h2><ul><li>Merging by subject (decision 0001) merged two causes. Check cause before merging.</li></ul>
 <p class="stamp">desk ref <b>DR-KVWY-7THP</b></p></body></html>
