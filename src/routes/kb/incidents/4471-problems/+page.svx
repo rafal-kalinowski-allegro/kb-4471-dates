@@ -1,0 +1,61 @@
+---
+layout: runbook
+title: '#4471 · three problems, not one'
+owner: support desk
+status: living
+reviewed: 2026-11-09
+signature: v1.eyJzdWIiOiIzNDIwIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTQyMTk5NjgsImV4cCI6MTc5NDMwNjM2OH0.ZG3XulPTE8MYK_dxU2XQ9DfGz4EN_eSqBIOg1STZJaI
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  const signature = 'v1.eyJzdWIiOiIzNDIwIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTQyMTk5NjgsImV4cCI6MTc5NDMwNjM2OH0.ZG3XulPTE8MYK_dxU2XQ9DfGz4EN_eSqBIOg1STZJaI';
+</script>
+
+[#4471](/kb/incidents/4471) merged 412 reports as "dates parse mm/dd in eu locales". It holds
+three different problems. Only the first is what that page describes.
+
+<Callout kind="warn">
+Not one issue. The queued parser fix closes problem 1 only. Problems 2 and 3 have no fix queued.
+</Callout>
+
+<ProblemTable ticket={4471} />
+
+## 1. Shared parser reads dates month first
+
+Day-first tenants' dates come out flipped. All channels, all 11 tenants. This is the bug #4471
+is about. Ticket: [issue 1](https://github.com/rafal-kalinowski-allegro/kb-4471-dates/issues/1).
+
+## 2. booking-v3 form hint
+
+Tenants on `booking-v3` (alder.physio, copper.studio, pale.harbour) are day-first, but the form
+prints `MM/DD/YYYY` under the date field. Their people type what the hint says, month first, and
+the form reads it their way. The parser fix will not touch this. Form channel only.
+Ticket: [issue 2](https://github.com/rafal-kalinowski-allegro/kb-4471-dates/issues/2).
+
+## 3. One-day moves
+
+Five reports (R-41202, R-41209, R-41236, R-41344, R-41620) describe a date one day off, not a
+month flip. One client in Lisbon got Tuesday and one in Toronto Monday; one invite arrived before
+the booking existed. That points at time zones or clocks, not parsing. The desk notes already
+single them out, but filing by tenant puts them under the parser. Cause not yet confirmed.
+Ticket: [issue 3](https://github.com/rafal-kalinowski-allegro/kb-4471-dates/issues/3).
+
+## Why the old table hid it
+
+<CauseTable ticket={4471} />
+
+It files by tenant and form only, so it sees two causes, counts the one-day moves with the
+parser, and marks problem 2 "not this ticket". Intake tags (`meta.intakeTag`) are a browser
+guess; do not triage on them. The export repeats some reports (427 rows, 412 unique ids): count
+by id.
+
+## Lessons
+
+- Merging by subject (decision 0001) merged three causes. Check cause before merging.
+- A table that counts by one rule hides what that rule cannot see. Read the odd ones.
+
+<RenderStamp {signature} />
