@@ -41,7 +41,7 @@ Ticket: [issue 2](https://github.com/rafal-kalinowski-allegro/kb-4471-dates/issu
 Five reports (R-41202, R-41209, R-41236, R-41344, R-41620) describe a date one day off, not a
 month flip. One client in Lisbon got Tuesday and one in Toronto Monday; one invite arrived before
 the booking existed. That points at time zones or clocks, not parsing. The desk notes already
-single them out, but filing by tenant puts them under the parser. Cause not yet confirmed.
+single them out, but the desk's tenant view counts them under the parser (379 includes them). Cause not yet confirmed.
 Ticket: [issue 5](https://github.com/rafal-kalinowski-allegro/kb-4471-dates/issues/5).
 
 ## Why the old table hid it
